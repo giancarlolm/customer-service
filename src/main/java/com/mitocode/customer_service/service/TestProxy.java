@@ -4,7 +4,7 @@ import com.mitocode.customer_service.entity.Producto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "PRODUCT-SERVICE")
+@FeignClient(name = "TEST-SERVICE")
 public interface TestProxy {
 
     @GetMapping("/product/name")

@@ -1,27 +1,42 @@
 package com.mitocode.customer_service.controller;
 
-import com.mitocode.customer_service.service.TestProxy;
+import com.mitocode.customer_service.client.PaymentClient;
+import com.mitocode.customer_service.client.ProductClient;
 import com.mitocode.customer_service.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 
 @RestController
-@RequestMapping("customer")
+@RequestMapping("test")
 public class TestController {
 
     @Autowired
-    private TestProxy testProxy;
+    private TestService testService;
 
     @Autowired
-    private TestService testService;
+    private ProductClient productClient;
+
+    @Autowired
+    private PaymentClient paymentClient;
 
 
     @GetMapping("hola")
     public String getHola() {
         return testService.getName();
+    }
+
+    @GetMapping("product")
+    public String getHolaProducto(){
+        return productClient.getHolaProduct();
+    }
+
+    @GetMapping("payment")
+    public String getHolaPayment(){
+        return paymentClient.getHola();
     }
 
 
