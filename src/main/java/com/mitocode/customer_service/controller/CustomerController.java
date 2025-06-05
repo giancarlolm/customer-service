@@ -11,7 +11,7 @@ public class CustomerController {
 
     @GetMapping("hola")
     public String hola() {
-        return "hola customer";
+        return "hola desde customer";
     }
 
 }

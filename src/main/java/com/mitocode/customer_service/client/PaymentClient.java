@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "PAYMENT-SERVICE")
+@FeignClient(name = "lb://PAYMENT-SERVICE")
 public interface PaymentClient {
 
     @GetMapping("/payment/get/{id}")
