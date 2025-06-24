@@ -24,6 +24,18 @@ spring:
         enabled: true
         interval: 25s
 
+redis:
+  host: localhost
+  port: 6379
+  password:
+  timeout: 2s                 # Timeout en segundos (s)
+  lettuce:
+    pool:
+      max-active: 8
+      max-idle: 8
+      min-idle: 0
+  #time-to-live: 1m            # Tiempo de vida del cache
+
 # OpenAPI/Swagger Configuration
 springdoc:
   swagger-ui:
