@@ -36,6 +36,35 @@ redis:
       min-idle: 0
   #time-to-live: 1m            # Tiempo de vida del cache
 
+resilience4j:
+  retry:
+    configs:
+      default:
+        maxAttempts: 3         # intenta hasta 3 veces
+        waitDuration: 5s       # espera 2 s entre cada intento
+    instances:
+      productService:
+        baseConfig: default
+        waitDuration: 10s
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowType: COUNT_BASED  # Medición por conteo
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 60s
+        #permittedNumberOfCallsInHalfOpenState: 5
+    instances:
+      customerService:
+        baseConfig: default
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 5
+      dataBase:
+        baseConfig: default
+        waitDurationInOpenState: 30s
+
+
+
 # OpenAPI/Swagger Configuration
 springdoc:
   swagger-ui:

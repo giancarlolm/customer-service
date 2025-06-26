@@ -24,6 +24,11 @@ public class TestController {
     private PaymentClient paymentClient;
 
 
+    @GetMapping("circuit")
+    public String testCircuit(){
+        return testService.circuit();
+    }
+
     @GetMapping("hola")
     public String getHola() {
         return testService.getName();
