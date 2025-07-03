@@ -23,6 +23,26 @@ spring:
       health-check:
         enabled: true
         interval: 25s
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer  # En caso de usar AVRO
+      acks: all
+      retries: 3
+      batch-size: 16384
+      linger-ms: 5
+      buffer-memory: 33554432
+      properties:
+        # Schema Registry URL - siempre en cuando usemos el schema register
+        # schema.registry.url: http://localhost:8081
+        # Auto registrar schemas
+        # auto.register.schemas: true
+        # Usar versión más reciente
+        use.latest.version: true
+        # Idempotencia para evitar duplicados
+        enable.idempotence: true
 
 redis:
   host: localhost
@@ -63,6 +83,17 @@ resilience4j:
         baseConfig: default
         waitDurationInOpenState: 30s
 
+
+app:
+  kafka:
+    error-topic: "application-errors"
+    error-producer:
+      enabled: false
+      batch-size: 1000
+      linger-ms: 10
+  service:
+    name: "customer-service"
+    version: "1.0.0"
 
 
 # OpenAPI/Swagger Configuration
